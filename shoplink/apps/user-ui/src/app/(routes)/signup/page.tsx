@@ -6,6 +6,8 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import GoogleButton from "../../shared/components/google-button";
 import { Eye, EyeOff } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 
 type FormData = {
   name: string;
@@ -30,6 +32,36 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
+  const startResendTimer = () => {
+    const interval = setInterval(() => {
+    setTimer((prev) =>{
+      if(prev <= 1){
+        clearInterval(interval);
+        setCanResend(true);
+        return 0;
+      }
+      return prev -1;
+    });
+    }, 1000);
+  };
+
+  const signupMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      const response = await axios.post(
+        `${process.env['NEXT_PUBLIC_SERVER_URI']}/api/user-registration`,
+        data
+      );
+        return response.data;
+    },
+      onSuccess: (_, formData) => {
+      setUserData(formData)
+      setShowOtp(true);
+      setCanResend(false);
+      setTimer(60);
+      startResendTimer();
+    }
+  });
 
   const onSubmit = (data: FormData) => {
     console.log(data);
