@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCheck } from "lucide-react";
 import Image from "next/image";
-import ChatInput from "apps/user-ui/src/shared/components/chats/chatinput";
+//import ChatInput from "apps/user-ui/src/shared/components/chats/chatinput";
 
 const mockChats = [
   {
