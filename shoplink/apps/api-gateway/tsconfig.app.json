@@ -2,14 +2,19 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "out-tsc/auth-service",
-    "types": ["node","express"],
+    "types": ["node", "express"],
     "rootDir": "../../",
-    "tsBuildInfoFile": "out-tsc/auth-service/tsconfig.app.tsbuildinfo"
+    "tsBuildInfoFile": "out-tsc/auth-service/tsconfig.app.tsbuildinfo",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.ts",
-    "../../packages/**/**.ts"
-, "../../packages/components/size-selector/index.tsx"  ],
+    "src/**/*.json",
+    "src/custom.d.ts",
+    "../../packages/**/*.ts",
+    "../../packages/components/size-selector/index.tsx"
+  ],
   "exclude": [
     "out-tsc",
     "dist",
