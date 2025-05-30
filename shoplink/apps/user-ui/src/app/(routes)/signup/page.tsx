@@ -64,7 +64,7 @@ const Signup = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    signupMutation.mutate(data)
   };
   const handleOtpchange = (index:number, value: string) => {
     if (!/^[0-9]?$/.test(value)) return;
