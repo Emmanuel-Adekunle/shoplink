@@ -19,3 +19,9 @@ const handleLogout = () => {
 const subscribeTokenRefresh = (callback: () => void) => {
   refreshSubscribers.push(callback);
 };
+
+// Execute queued requests after refresh
+const onRefreshSuccess = () => {
+  refreshSubscribers.forEach((callback) => callback());
+  refreshSubscribers = [];
+};
