@@ -158,7 +158,9 @@ const ForgotPassword = () => {
 
       <div className="w-full flex justify-center">
         <div className="md:w-[480px] p-8 bg-white shadow rounded-lg">
-          <h3 className="text-3xl font-semibold text-center mb-2">
+          {step === "email" && (
+            <>
+              <h3 className="text-3xl font-semibold text-center mb-2">
             Login to SHOPLINK
           </h3>
           <p className="text-center text-gray-500 mb-4">
@@ -170,7 +172,7 @@ const ForgotPassword = () => {
           </p>
 
 
-          <form onSubmit={handleSubmit(onSubmitEmail)}>
+            <form onSubmit={handleSubmit(onSubmitEmail)}>
             <label className="block text-gray-700 mb-1">Email</label>
             <input 
               type="email"
@@ -201,7 +203,9 @@ const ForgotPassword = () => {
                 {serverError && (
                   <p className="text-red-500 text-sm mt-2">{serverError}</p>
                 )}
-          </form>
+            </form>
+            </>
+          )}
         </div>
       </div>
     </div>
