@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
+import { useMutation } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 type FormData = {
@@ -29,7 +29,6 @@ const ForgotPassword = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-
   const startResendTimer = () => {
     setCanResend(false);
     setTimer(60);
@@ -44,7 +43,6 @@ const ForgotPassword = () => {
       });
     }, 1000);
   };
-
 
   const requestOtpMutation = useMutation({
     mutationFn: async ({ email }: { email: string }) => {
@@ -69,7 +67,6 @@ const ForgotPassword = () => {
     },
   });
 
-
   const verifyOtpMutation = useMutation({
     mutationFn: async () => {
       if (!userEmail) return;
@@ -89,7 +86,6 @@ const ForgotPassword = () => {
       setServerError(errorMessage || "Invalid OTP. Try again!");
     },
   });
-
 
   const resetPasswordMutation = useMutation({
     mutationFn: async ({ password }: { password: string }) => {
@@ -114,7 +110,6 @@ const ForgotPassword = () => {
       setServerError(errorMessage || "Failed to reset password. Try again!");
     },
   });
-
 
   const handleOtpChange = (index: number, value: string) => {
     if (!/^[0-9]?$/.test(value)) return;
@@ -147,11 +142,11 @@ const ForgotPassword = () => {
 
   return (
     <div className="w-full py-10 min-h-[85vh] bg-[#f1f1f1]">
-      <h1 className="text-4xl font-poppins font-semibold text-black text-center">
+      <h1 className="text-4xl font-Poppins font-semibold text-black text-center">
         Forgot Password
       </h1>
-      <p className="text-center text-lg font-medium py-3 text-[#000000099]">
-        Home . Forgot-Password
+      <p className="text-center text-lg font-medium py-3 text-[#00000099]">
+        Home . Forgot-password
       </p>
 
       <div className="w-full flex justify-center">
@@ -159,37 +154,37 @@ const ForgotPassword = () => {
           {step === "email" && (
             <>
               <h3 className="text-3xl font-semibold text-center mb-2">
-            Login to SHOPLINK
-          </h3>
-          <p className="text-center text-gray-500 mb-4">
-            Return to?{' '}
-            <Link href={"/login"} className= "text-blue-500">
-            Login
-            </Link>
-
-          </p>
-          
-            <form onSubmit={handleSubmit(onSubmitEmail)}>
-            <label className="block text-gray-700 mb-1">Email</label>
-            <input 
-              type="email"
-              placeholder="emmanuels.adekunle@gmail.com"
-              className="w-full p-2 border border-gray-300 outline-0 !rounded mb-1"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Invalid email address",
-                }
-              })}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">
-                {String(errors.email.message)}
+                Login to SHOPLINK
+              </h3>
+              <p className="text-center text-gray-500 mb-4">
+                Return to?{" "}
+                <Link href={"/login"} className="text-blue-500">
+                  Login
+                </Link>
               </p>
-            )}
 
-                <button 
+              <form onSubmit={handleSubmit(onSubmitEmail)}>
+                <label className="block text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  placeholder="emmanuelsadekunle@.com"
+                  className="w-full p-2 border border-gray-300 outline-0 !rounded mb-1"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">
+                    {String(errors.email.message)}
+                  </p>
+                )}
+
+                <button
                   type="submit"
                   disabled={requestOtpMutation.isPending}
                   className="w-full text-lg cursor-pointer mt-4 bg-black text-white py-2 rounded-lg"
@@ -200,7 +195,7 @@ const ForgotPassword = () => {
                 {serverError && (
                   <p className="text-red-500 text-sm mt-2">{serverError}</p>
                 )}
-            </form>
+              </form>
             </>
           )}
 
@@ -295,7 +290,6 @@ const ForgotPassword = () => {
               </form>
             </>
           )}
-
         </div>
       </div>
     </div>
