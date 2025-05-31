@@ -25,3 +25,9 @@ const onRefreshSuccess = () => {
   refreshSubscribers.forEach((callback) => callback());
   refreshSubscribers = [];
 };
+
+// Handle API requests
+axiosInstance.interceptors.request.use(
+  (config) => config,
+  (error) => Promise.reject(error)
+);
