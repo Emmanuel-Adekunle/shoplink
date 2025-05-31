@@ -246,6 +246,15 @@ const Signup = () => {
                   `Resend OTP in ${timer}s`
                 )}
               </p>
+              {
+                verifyOtpMutation ?.isError &&
+                verifyOtpMutation.error instanceof AxiosError && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {verifyOtpMutation.error.response?.data?.message ||
+                      verifyOtpMutation.error.message}
+                  </p>
+                )
+              }
             </div>
           )}
         </div>
