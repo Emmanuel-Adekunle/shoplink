@@ -234,7 +234,7 @@ const Signup = () => {
               disabled={verifyOtpMutation.isPending}
               onClick={() => verifyOtpMutation.mutate()}
               >
-                Verify OTP
+                {verifyOtpMutation.isPending ? "Verifying..." : "Verify OTP"}
               </button>
               <p className="text-center text-sm mt-4">
                 {canResend ?(
