@@ -63,6 +63,23 @@ const Signup = () => {
     }
   });
 
+
+  const verifyOtpMutation = useMutation({
+    mutationFn: async () => {
+      if(!userData)return;
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/verify-user`,
+        {
+          ... userData,
+          otp: otp.join(""),
+        }
+      );
+      return response.data;
+    },
+    onSuccess: () =>{
+      router.push("/login");
+    },
+  });
+
   const onSubmit = (data: FormData) => {
     signupMutation.mutate(data)
   };
