@@ -256,7 +256,49 @@ const ForgotPassword = () => {
               )}
             </>
           )}
-          
+
+          {step === "reset" && (
+            <>
+              <h3 className="text-xl font-semibold text-center mb-4">
+                Reset Password
+              </h3>
+              <form onSubmit={handleSubmit(onSubmitPassword)}>
+                <label className="block text-gray-700 mb-1">New Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter new password"
+                  className="w-full p-2 border border-gray-300 outline-0 !rounded mb-1"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm">
+                    {String(errors.password.message)}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full mt-4 text-lg cursor-pointer bg-black text-white py-2 rounded-lg"
+                  disabled={resetPasswordMutation.isPending}
+                >
+                  {resetPasswordMutation.isPending
+                    ? "Resetting..."
+                    : "Reset Password"}
+                </button>
+
+                {serverError && (
+                  <p className="text-red-500 text-sm mt-2">{serverError}</p>
+                )}
+              </form>
+            </>
+          )}
+
         </div>
       </div>
     </div>
