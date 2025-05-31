@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-  "dev": "node src/main.ts",
-  "auth-docs": "node apps/auth-service/src/swagger.js"
-},
+    "dev": "node src/main.ts",
+    "auth-docs": "node apps/auth-service/src/swagger.js"
+  },
   "nx": {
     "name": "auth-service",
     "projectType": "application",
@@ -36,5 +36,11 @@
         }
       }
     }
+  },
+  "dependencies": {
+    "stripe": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/stripe": "^8.0.417"
   }
 }
