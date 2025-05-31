@@ -206,6 +206,57 @@ const ForgotPassword = () => {
             </form>
             </>
           )}
+
+          {step === "otp" && (
+            <>
+              <h3 className="text-xl font-semibold text-center mb-4">
+                Enter OTP
+              </h3>
+              <div className="flex justify-center gap-6">
+                {otp.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => {
+                      if (el) inputRefs.current[index] = el;
+                    }}
+                    type="text"
+                    maxLength={1}
+                    className="w-12 h-12 text-center border border-gray-300 outline-none !rounded"
+                    value={digit}
+                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                    onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => verifyOtpMutation.mutate()}
+                className="w-full mt-4 text-lg cursor-pointer bg-black text-white py-2 rounded-lg"
+                disabled={verifyOtpMutation.isPending}
+              >
+                {verifyOtpMutation.isPending ? "Verifying..." : "Verify OTP"}
+              </button>
+
+              {canResend ? (
+                <button
+                  onClick={() =>
+                    requestOtpMutation.mutate({ email: userEmail! })
+                  }
+                  className="text-blue-500 text-center mt-4 cursor-pointer"
+                >
+                  Resend OTP
+                </button>
+              ) : (
+                <p className="text-center text-sm mt-4">
+                  Resend OTP in {timer}s
+                </p>
+              )}
+
+              {serverError && (
+                <p className="text-red-500 text-sm mt-2">{serverError}</p>
+              )}
+            </>
+          )}
+          
         </div>
       </div>
     </div>
