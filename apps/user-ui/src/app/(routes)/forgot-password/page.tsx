@@ -71,6 +71,27 @@ const ForgotPassword = () => {
   });
 
 
+  const verifyOtpMutation = useMutation({
+    mutationFn: async () => {
+      if (!userEmail) return;
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/verify-forgot-password-user`,
+        { email: userEmail, otp: otp.join("") }
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      setStep("reset");
+      setServerError(null);
+    },
+    onError: (error: AxiosError) => {
+      const errorMessage = (error.response?.data as { message?: string })
+        ?.message;
+      setServerError(errorMessage || "Invalid OTP. Try again!");
+    },
+  });
+
+
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
