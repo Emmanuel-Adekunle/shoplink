@@ -130,6 +130,15 @@ const ForgotPassword = () => {
     }
   };
 
+  const handleOtpKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
