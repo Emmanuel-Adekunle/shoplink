@@ -134,10 +134,12 @@ const Login = () => {
                   Forgot Password?
                   </Link>
                 </div>
-                <button type="submit"
+                <button 
+                  type="submit"
+                  disabled={loginMutation.isPending}
                   className="w-full text-lg cursor-pointer bg-black text-white py-2 rounded-lg"
                 >
-                  Login
+                  {loginMutation?.isPending ? "Logging in ..." : "Login"}
                 </button>
 
                 {serverError && (
