@@ -168,8 +168,7 @@ const ForgotPassword = () => {
             </Link>
 
           </p>
-
-
+          
             <form onSubmit={handleSubmit(onSubmitEmail)}>
             <label className="block text-gray-700 mb-1">Email</label>
             <input 
