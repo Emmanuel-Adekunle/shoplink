@@ -170,7 +170,7 @@ const ForgotPassword = () => {
           </p>
 
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmitEmail)}>
             <label className="block text-gray-700 mb-1">Email</label>
             <input 
               type="email"
