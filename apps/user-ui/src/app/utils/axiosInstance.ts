@@ -14,3 +14,8 @@ const handleLogout = () => {
     window.location.href = "/login";
   }
 };
+
+// Handle adding a new access token to queued requests
+const subscribeTokenRefresh = (callback: () => void) => {
+  refreshSubscribers.push(callback);
+};
