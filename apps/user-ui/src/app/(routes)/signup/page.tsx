@@ -230,7 +230,10 @@ const Signup = () => {
                   />
                 ))}
               </div>
-              <button className="w-full mt-4 text-lg cursor-pointer bg-blue-500 text-white py-2 rounded-lg">
+              <button className="w-full mt-4 text-lg cursor-pointer bg-blue-500 text-white py-2 rounded-lg" 
+              disabled={verifyOtpMutation.isPending}
+              onClick={() => verifyOtpMutation.mutate()}
+              >
                 Verify OTP
               </button>
               <p className="text-center text-sm mt-4">
