@@ -118,6 +118,18 @@ const ForgotPassword = () => {
   });
 
 
+  const handleOtpChange = (index: number, value: string) => {
+    if (!/^[0-9]?$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
