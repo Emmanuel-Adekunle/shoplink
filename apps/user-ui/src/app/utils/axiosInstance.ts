@@ -31,3 +31,42 @@ axiosInstance.interceptors.request.use(
   (config) => config,
   (error) => Promise.reject(error)
 );
+
+// Handle expired tokens and refresh logic
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // prevent infinite retry loop
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          subscribeTokenRefresh(() => resolve(axiosInstance(originalRequest)));
+        });
+      }
+      originalRequest._retry = true;
+      isRefreshing = true;
+      try {
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER_URI}/api/refresh-token`,
+          {},
+          { withCredentials: true }
+        );
+
+        isRefreshing = false;
+        onRefreshSuccess();
+
+        return axiosInstance(originalRequest);
+      } catch (error) {
+        isRefreshing = false;
+        refreshSubscribers = [];
+        handleLogout();
+        return Promise.reject(error);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;
