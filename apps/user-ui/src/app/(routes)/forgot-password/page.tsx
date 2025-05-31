@@ -194,7 +194,7 @@ const ForgotPassword = () => {
                   disabled={requestOtpMutation.isPending}
                   className="w-full text-lg cursor-pointer mt-4 bg-black text-white py-2 rounded-lg"
                 >
-                  Submit
+                  {requestOtpMutation.isPending ? "Sending OTP..." : "Submit"}
                 </button>
 
                 {serverError && (
