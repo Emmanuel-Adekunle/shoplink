@@ -182,9 +182,10 @@ const Signup = () => {
 
               <button
                 type="submit"
+                disabled={signupMutation.isPending}
                 className="w-full text-lg cursor-pointer mt-4 bg-black text-white py-2 rounded-lg"
               >
-                Signup
+                {signupMutation.isPending ? "Signing up ..." : "Signup"}
               </button>
 
               {serverError && (
