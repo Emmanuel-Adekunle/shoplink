@@ -139,8 +139,12 @@ const ForgotPassword = () => {
     }
   };
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmitEmail = ({ email }: { email: string }) => {
+    requestOtpMutation.mutate({ email });
+  };
+
+  const onSubmitPassword = ({ password }: { password: string }) => {
+    resetPasswordMutation.mutate({ password });
   };
 
   return (
