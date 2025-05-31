@@ -1,4 +1,4 @@
-/*import prisma from "@packages/libs/prisma";
+import prisma from "@packages/libs/prisma";
 import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
 
@@ -54,4 +54,4 @@ const isAuthenticated = async (req: any, res: Response, next: NextFunction) => {
   }
 };
 
-export default isAuthenticated; */
+export default isAuthenticated; 
