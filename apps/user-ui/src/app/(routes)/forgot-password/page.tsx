@@ -8,6 +8,7 @@ import GoogleButton from "../../shared/components/google-button";
 import { Eye, EyeOff } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 type FormData = {
   email: string;
@@ -88,6 +89,31 @@ const ForgotPassword = () => {
       const errorMessage = (error.response?.data as { message?: string })
         ?.message;
       setServerError(errorMessage || "Invalid OTP. Try again!");
+    },
+  });
+
+
+  const resetPasswordMutation = useMutation({
+    mutationFn: async ({ password }: { password: string }) => {
+      if (!password) return;
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/reset-password-user`,
+        { email: userEmail, newPassword: password }
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      setStep("email");
+      toast.success(
+        "Password reset successfully! Please login with your new password."
+      );
+      setServerError(null);
+      router.push("/login");
+    },
+    onError: (error: AxiosError) => {
+      const errorMessage = (error.response?.data as { message?: string })
+        ?.message;
+      setServerError(errorMessage || "Failed to reset password. Try again!");
     },
   });
 
