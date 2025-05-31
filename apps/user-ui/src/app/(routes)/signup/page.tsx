@@ -222,7 +222,7 @@ const Signup = () => {
                     className="text-blue-500 cursor-pointer"
                   >Resend OTP</button>
                 ) : (
-                  "Resend OTP in $ {timer}s"
+                  `Resend OTP in ${timer}s`
                 )}
               </p>
             </div>
