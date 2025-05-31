@@ -17,7 +17,6 @@ type FormData = {
 
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
   const [showOtp, setShowOtp] = useState(false);
   const [canResend, setCanResend] = useState(true);
   const [timer, setTimer] = useState(60);
@@ -205,9 +204,6 @@ const Signup = () => {
                 {signupMutation.isPending ? "Signing up ..." : "Signup"}
               </button>
 
-              {serverError && (
-                <p className="text-red-500 text-sm mt-2">{serverError}</p>
-              )}
             </form>
           ) : (
             <div>
