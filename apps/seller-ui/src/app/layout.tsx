@@ -1,4 +1,5 @@
 import './global.css';
+import Providers from './provider';
 
 export const metadata = {
   title: 'SHOPLINK MERCHANT',
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <Providers>
+        {children}
+      </Providers>
     </html>
   )
 }
