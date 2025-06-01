@@ -3,6 +3,7 @@ import CartIcon from 'apps/user-ui/src/assets/svgs/cart-icon';
 import HeartIcon from 'apps/user-ui/src/assets/svgs/heart-icon';
 import ProfileIcon from 'apps/user-ui/src/assets/svgs/profile-icon';
 import { navItems } from 'apps/user-ui/src/configs/constants';
+import useUser from 'apps/user-ui/src/hooks/useUser';
 import { AlignLeft, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -10,6 +11,9 @@ import React, { useEffect, useState } from 'react'
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const { user} = useUser();
+
+  console.log(user);
 
   // Track scroll position
   useEffect(() => {
