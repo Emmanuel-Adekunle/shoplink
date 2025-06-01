@@ -40,12 +40,14 @@ const Header = () => {
           <div className="flex items-center gap-2">
             {!isLoading && user ? (
               <>
-                <Link href="/profile">
+                <Link href="/profile"
+                className="border-2 w-[50px] h-[50px] flex items-center justify-center rounded-full border-[#010f1c1a]"
+                >
                   <ProfileIcon />
                 </Link>
                 <div>
                   <span className="block font-medium">Hello,</span>
-                  <span className="font-semibold">{user.name}</span>
+                  <span className="font-semibold">{user.name.split("  ") [0]}</span>
                 </div>
               </>
             ) : (
