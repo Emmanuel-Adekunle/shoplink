@@ -13,7 +13,6 @@ const HeaderBottom = () => {
   const [isSticky, setIsSticky] = useState(false);
   const { user} = useUser();
 
-  console.log(user);
 
   // Track scroll position
   useEffect(() => {
