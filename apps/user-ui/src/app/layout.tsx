@@ -1,13 +1,9 @@
-import "./global.css";
-import { Poppins, Roboto } from "next/font/google";
+'use client';
+import { useEffect, useState } from 'react';
 import Providers from "./providers";
 import ClientHeader from "./shared/widgets/header/ClientHeader";
-
-
-export const metadata = {
-  title: "SHOPLINK",
-  description: "SHOPLINK",
-};
+import "./global.css";
+import { Poppins, Roboto } from "next/font/google";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -17,30 +13,22 @@ const roboto = Roboto({
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: [
-    "100",
-    "200",
-    "300",
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900",
-  ],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${poppins.variable}`}>
         <Providers>
-          <ClientHeader /> {/* ✅ use client version of Header */}
+          {mounted && <ClientHeader />}
           {children}
         </Providers>
       </body>
